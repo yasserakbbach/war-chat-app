@@ -1,0 +1,21 @@
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+.env
+
+# Logs from earlier
+npm_log.txt
+npm_ver.txt
+
+# macOS / Local Sandbox Home Overrides
+.DS_Store
+Library/
+.npm/
