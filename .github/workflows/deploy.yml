@@ -19,7 +19,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '25.9.0' # Change this if your project requires a specific Node version
+          node-version: 'latest'
+          check-latest: true
 
       # Step 3: Install project dependencies
       - name: Install Dependencies
