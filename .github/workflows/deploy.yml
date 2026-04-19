@@ -1,0 +1,45 @@
+name: Build and Deploy Expo Web to Namecheap
+
+# Trigger the workflow on push events to the main branch
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the latest code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '25.9.0' # Change this if your project requires a specific Node version
+
+      # Step 3: Install project dependencies
+      - name: Install Dependencies
+        run: npm install # Use 'yarn install' if you use yarn
+
+      # Step 4: Build the Expo project for the web
+      # Note: 'npx expo export' outputs to the 'dist' folder by default in newer Expo SDKs.
+      - name: Build Web App
+        run: npx expo export -p web
+
+      # Step 5: Push the compiled build to Namecheap
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          
+          # CRITICAL: Point this to the output folder of your Expo build so it doesn't upload your raw source code.
+          local-dir: ./dist/ 
+          
+          # The directory on your Namecheap server
+          server-dir: /public_html/ 
