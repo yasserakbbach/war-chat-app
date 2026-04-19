@@ -104,7 +104,7 @@ export default function App() {
     <SafeAreaView style={styles.safeArea}>
       {/* Sticky Top Banner */}
       <View style={styles.wipBanner}>
-        <Text style={styles.wipBannerText}>WIP - We're so tired of winning</Text>
+        <Text style={styles.wipBannerText}>WIP - We're so tired of winning 🪖</Text>
       </View>
 
       <KeyboardAvoidingView 
